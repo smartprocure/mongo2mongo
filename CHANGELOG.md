@@ -1,7 +1,13 @@
-# 0.2.0
+# 0.3.0
+
+- Added peer dependencies.
 
 * Latest `mongochangestream`.
 
+# 0.2.0
+
+- Latest `mongochangestream`.
+
 # 0.1.0
 
-* Initial release.
+- Initial release.
