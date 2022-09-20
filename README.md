@@ -24,5 +24,6 @@ const changeStream = await sync.processChangeStream()
 changeStream.start()
 // Run initial scan of collection batching documents by 1000
 const options = { batchSize: 1000 }
-retry(() => sync.runInitialScan(options))
+const initialScan = await sync.runInitialScan(options)
+initialScan.start()
 ```
