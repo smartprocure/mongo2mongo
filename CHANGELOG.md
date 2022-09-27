@@ -1,3 +1,8 @@
+# 0.6.0
+
+- Bump `mongodb` peer dep.
+- Latest `mongochangestream`.
+
 # 0.5.2
 
 - Bug fix from `mongochangestream`.

@@ -1,11 +1,11 @@
 import _ from 'lodash/fp.js'
-import {
+import type {
   ChangeStreamDocument,
   ChangeStreamInsertDocument,
   Collection,
   Document,
 } from 'mongodb'
-import { default as Redis } from 'ioredis'
+import type { Redis } from 'ioredis'
 import mongoChangeStream, { ScanOptions } from 'mongochangestream'
 import { stats } from 'print-stats'
 import { QueueOptions } from 'prom-utils'
