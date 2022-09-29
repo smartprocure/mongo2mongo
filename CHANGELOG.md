@@ -1,3 +1,7 @@
+# 0.7.0
+
+- Latest `mongochangestream` - Ensure that you can call `start` after calling `stop`.
+
 # 0.6.0
 
 - Bump `mongodb` peer dep.
