@@ -77,7 +77,6 @@ export const initSync = (
     runInitialScan,
     keys: sync.keys,
     reset: sync.reset,
-    clearCompletedOn: sync.clearCompletedOn,
     getCollectionSchema: sync.getCollectionSchema,
     detectSchemaChange: sync.detectSchemaChange,
   }
