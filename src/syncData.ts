@@ -7,9 +7,9 @@ import type {
 } from 'mongodb'
 import type { Redis } from 'ioredis'
 import mongoChangeStream, { ScanOptions } from 'mongochangestream'
-import { stats } from 'print-stats'
 import { QueueOptions } from 'prom-utils'
-import { SyncOptions } from './types.js'
+import { SyncOptions, Events } from './types.js'
+import EventEmitter from 'eventemitter3'
 
 export const initSync = (
   redis: Redis,
@@ -18,7 +18,8 @@ export const initSync = (
   options: SyncOptions & mongoChangeStream.SyncOptions = {}
 ) => {
   const mapper = options.mapper || _.identity<Document>
-  const dbStats = stats(destination.collectionName)
+  const emitter = new EventEmitter<Events>()
+
   const processRecord = async (doc: ChangeStreamDocument) => {
     try {
       if (doc.operationType === 'insert') {
@@ -35,12 +36,10 @@ export const initSync = (
       } else if (doc.operationType === 'delete') {
         await destination.deleteOne({ _id: doc.documentKey._id })
       }
-      dbStats.incRows()
+      emitter.emit('process', { type: 'process', success: 1 })
     } catch (e) {
-      console.error('ERROR', e)
-      dbStats.incErrors()
+      emitter.emit('error', { type: 'error', error: e })
     }
-    dbStats.print()
   }
 
   const processRecords = async (docs: ChangeStreamInsertDocument[]) => {
@@ -51,33 +50,36 @@ export const initSync = (
       const result = await destination.bulkWrite(documents, { ordered: false })
       const numInserted = result.nInserted
       const numFailed = documents.length - numInserted
-      dbStats.incRows(numInserted)
-      dbStats.incErrors(numFailed)
+      emitter.emit('process', {
+        type: 'process',
+        success: numInserted,
+        fail: numFailed,
+      })
     } catch (e) {
-      console.error('ERROR', e)
+      emitter.emit('error', { type: 'error', error: e })
     }
-    dbStats.print()
   }
 
   const sync = mongoChangeStream.initSync(redis, source, options)
-  /**
-   * Process MongoDB change stream for the given collection.
-   */
   const processChangeStream = (pipeline?: Document[]) =>
     sync.processChangeStream(processRecord, pipeline)
-  /**
-   * Run initial collection scan. `options.batchSize` defaults to 500.
-   * Sorting defaults to `_id`.
-   */
   const runInitialScan = (options?: QueueOptions & ScanOptions) =>
     sync.runInitialScan(processRecords, options)
 
   return {
+    /**
+     * Process MongoDB change stream for the given collection.
+     */
     processChangeStream,
+    /**
+     * Run initial collection scan. `options.batchSize` defaults to 500.
+     * Sorting defaults to `_id`.
+     */
     runInitialScan,
     keys: sync.keys,
     reset: sync.reset,
     getCollectionSchema: sync.getCollectionSchema,
     detectSchemaChange: sync.detectSchemaChange,
+    emitter,
   }
 }

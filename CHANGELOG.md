@@ -1,3 +1,8 @@
+# 0.10.0
+
+- Return `emitter` with events: `process` and `error`.
+- Stats are no longer logged.
+
 # 0.9.0
 
 - Removed `clearCompletedOn`.

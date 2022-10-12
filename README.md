@@ -19,6 +19,9 @@ const sync = initSync(
   db.collection('destinationCollection'),
   { omit: ['password', 'unneededStuff'] }
 )
+// Log events
+sync.emitter.on('process', console.info)
+sync.emitter.on('error', console.error)
 // Process change stream events
 const changeStream = await sync.processChangeStream()
 changeStream.start()
