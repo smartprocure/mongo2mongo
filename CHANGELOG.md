@@ -1,3 +1,7 @@
+# 0.11.1
+
+- Forgot to bump `prom-utils` in this repo.
+
 # 0.11.0
 
 - Latest `mongochangestream` - `batchBytes` option.
