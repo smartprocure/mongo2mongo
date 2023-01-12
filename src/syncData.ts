@@ -6,7 +6,7 @@ import type {
   Document,
 } from 'mongodb'
 import type { Redis } from 'ioredis'
-import mongoChangeStream, { ScanOptions } from 'mongochangestream'
+import mongoChangeStream, { ScanOptions, ChangeStreamOptions } from 'mongochangestream'
 import { QueueOptions } from 'prom-utils'
 import { SyncOptions, Events } from './types.js'
 import EventEmitter from 'eventemitter3'
@@ -61,8 +61,8 @@ export const initSync = (
   }
 
   const sync = mongoChangeStream.initSync(redis, source, options)
-  const processChangeStream = (pipeline?: Document[]) =>
-    sync.processChangeStream(processRecord, pipeline)
+  const processChangeStream = (options?: ChangeStreamOptions) =>
+    sync.processChangeStream(processRecord, options)
   const runInitialScan = (options?: QueueOptions & ScanOptions) =>
     sync.runInitialScan(processRecords, options)
 
