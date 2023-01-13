@@ -6,10 +6,12 @@ import type {
   Document,
 } from 'mongodb'
 import type { Redis } from 'ioredis'
-import mongoChangeStream, { ScanOptions, ChangeStreamOptions } from 'mongochangestream'
+import mongoChangeStream, {
+  ScanOptions,
+  ChangeStreamOptions,
+} from 'mongochangestream'
 import { QueueOptions } from 'prom-utils'
 import { SyncOptions, Events } from './types.js'
-import EventEmitter from 'eventemitter3'
 
 export const initSync = (
   redis: Redis,
@@ -18,7 +20,13 @@ export const initSync = (
   options: SyncOptions & mongoChangeStream.SyncOptions = {}
 ) => {
   const mapper = options.mapper || _.identity<Document>
-  const emitter = new EventEmitter<Events>()
+  // Initialize sync
+  const sync = mongoChangeStream.initSync(redis, source, options)
+  // Use emitter from mongochangestream
+  const emitter = sync.emitter
+  const emit = (event: Events, data: object) => {
+    emitter.emit(event, { type: event, ...data })
+  }
 
   const processRecord = async (doc: ChangeStreamDocument) => {
     try {
@@ -36,9 +44,9 @@ export const initSync = (
       } else if (doc.operationType === 'delete') {
         await destination.deleteOne({ _id: doc.documentKey._id })
       }
-      emitter.emit('process', { type: 'process', success: 1 })
+      emit('process', { success: 1 })
     } catch (e) {
-      emitter.emit('error', { type: 'error', error: e })
+      emit('error', { error: e })
     }
   }
 
@@ -50,17 +58,12 @@ export const initSync = (
       const result = await destination.bulkWrite(documents, { ordered: false })
       const numInserted = result.nInserted
       const numFailed = documents.length - numInserted
-      emitter.emit('process', {
-        type: 'process',
-        success: numInserted,
-        fail: numFailed,
-      })
+      emit('process', { success: numInserted, fail: numFailed })
     } catch (e) {
-      emitter.emit('error', { type: 'error', error: e })
+      emit('error', { error: e })
     }
   }
 
-  const sync = mongoChangeStream.initSync(redis, source, options)
   const processChangeStream = (options?: ChangeStreamOptions) =>
     sync.processChangeStream(processRecord, options)
   const runInitialScan = (options?: QueueOptions & ScanOptions) =>

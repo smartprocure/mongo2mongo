@@ -1,6 +1,11 @@
+# 0.13.0
+
+- Latest `mongochangestream` - generic emitter.
+- Use emitter from `mongochangestream` which now emits two events on its own.
+
 # 0.12.0
 
-Latest `mongochangestream` - health checks.
+- Latest `mongochangestream` - health checks.
 
 # 0.11.1
 
