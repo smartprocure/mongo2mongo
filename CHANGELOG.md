@@ -1,3 +1,7 @@
+# 0.14.0
+
+- Latest `mongochangestream` - Bug fix.
+
 # 0.13.0
 
 - Latest `mongochangestream` - generic emitter.
