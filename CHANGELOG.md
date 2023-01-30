@@ -1,3 +1,7 @@
+# 0.15.0
+
+- Latest `mongochangestream` - More robust cursor consumption.
+
 # 0.14.0
 
 - Latest `mongochangestream` - Bug fix.
