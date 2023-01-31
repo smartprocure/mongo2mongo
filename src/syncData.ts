@@ -44,9 +44,9 @@ export const initSync = (
       } else if (doc.operationType === 'delete') {
         await destination.deleteOne({ _id: doc.documentKey._id })
       }
-      emit('process', { success: 1 })
+      emit('process', { success: 1, changeStream: true })
     } catch (e) {
-      emit('error', { error: e })
+      emit('error', { error: e, changeStream: true })
     }
   }
 
@@ -58,9 +58,13 @@ export const initSync = (
       const result = await destination.bulkWrite(documents, { ordered: false })
       const numInserted = result.nInserted
       const numFailed = documents.length - numInserted
-      emit('process', { success: numInserted, fail: numFailed })
+      emit('process', {
+        success: numInserted,
+        fail: numFailed,
+        initialScan: true,
+      })
     } catch (e) {
-      emit('error', { error: e })
+      emit('error', { error: e, initialScan: true })
     }
   }
 
@@ -70,6 +74,7 @@ export const initSync = (
     sync.runInitialScan(processRecords, options)
 
   return {
+    ...sync,
     /**
      * Process MongoDB change stream for the given collection.
      */
@@ -79,10 +84,6 @@ export const initSync = (
      * Sorting defaults to `_id`.
      */
     runInitialScan,
-    keys: sync.keys,
-    reset: sync.reset,
-    getCollectionSchema: sync.getCollectionSchema,
-    detectSchemaChange: sync.detectSchemaChange,
     emitter,
   }
 }
