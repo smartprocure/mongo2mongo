@@ -1,3 +1,7 @@
+# 0.17.0
+
+- Latest `mongochangestream` - Longer `maxSyncDelay` default.
+
 # 0.16.0
 
 - Export `detectResync`.
