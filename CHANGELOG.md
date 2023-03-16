@@ -1,3 +1,7 @@
+# 0.19.0
+
+- Latest `mongochangestream` - `runInitialScan` pipeline.
+
 # 0.18.0
 
 - Latest `mongochangestream` - Handle master failover scenario properly for initial scan.
