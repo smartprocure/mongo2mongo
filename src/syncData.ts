@@ -21,7 +21,7 @@ export const initSync = (
 ) => {
   const mapper = options.mapper || _.identity<Document>
   // Initialize sync
-  const sync = mongoChangeStream.initSync(redis, source, options)
+  const sync = mongoChangeStream.initSync<Events>(redis, source, options)
   // Use emitter from mongochangestream
   const emitter = sync.emitter
   const emit = (event: Events, data: object) => {
