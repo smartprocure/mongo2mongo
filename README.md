@@ -22,6 +22,7 @@ const sync = initSync(
 // Log events
 sync.emitter.on('process', console.info)
 sync.emitter.on('error', console.error)
+sync.emitter.on('cursorError', () => process.exit(1))
 // Process change stream events
 const changeStream = await sync.processChangeStream()
 changeStream.start()

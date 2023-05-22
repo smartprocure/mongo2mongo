@@ -1,3 +1,7 @@
+# 0.21.0
+
+- Latest `mongochangestream` - Drop health check code in favor of `cursorError` event.
+
 # 0.20.0
 
 - Latest `mongochangestream` - extend event types.
