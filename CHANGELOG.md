@@ -1,3 +1,7 @@
+# 0.25.0
+
+- Latest `mongochangestream` - Change stream option `operationTypes` (`insert`, `update`, `delete`, ...).
+
 # 0.24.0
 
 - `processChangeStream` now batches records. Default timeout before the queue is automatically
