@@ -1,3 +1,7 @@
+# 0.26.0
+
+- Remove `updateDescription` since it is not needed and may cause a `BSONObjectTooLarge` error.
+
 # 0.25.0
 
 - Latest `mongochangestream` - Change stream option `operationTypes` (`insert`, `update`, `delete`, ...).
