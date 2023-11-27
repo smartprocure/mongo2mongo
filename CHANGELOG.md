@@ -1,3 +1,7 @@
+# 0.27.0
+
+- Latest `mongochangestream` - Bug fixes.
+
 # 0.26.0
 
 - Remove `updateDescription` since it is not needed and may cause a `BSONObjectTooLarge` error.
@@ -9,7 +13,7 @@
 # 0.24.0
 
 - `processChangeStream` now batches records. Default timeout before the queue is automatically
-flushed is 30 seconds.
+  flushed is 30 seconds.
 
 # 0.23.0
 
