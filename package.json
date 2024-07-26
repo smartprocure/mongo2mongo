@@ -1,6 +1,6 @@
 {
   "name": "mongo2mongo",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "description": "Sync one MongoDB collection to another MongoDB collection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

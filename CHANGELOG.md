@@ -1,7 +1,11 @@
-# 0.27.0
+# 0.28.0
 
 - Latest `mongochangestream`.
 - Bumped peer dependencies for `ioredis` and `mongodb`.
+
+# 0.27.0
+
+- Latest mongochangestream - Bug fixes.
 
 # 0.26.0
 
