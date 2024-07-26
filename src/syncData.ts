@@ -1,4 +1,9 @@
+import type { Redis } from 'ioredis'
 import _ from 'lodash/fp.js'
+import mongoChangeStream, {
+  type ChangeStreamOptions,
+  type ScanOptions,
+} from 'mongochangestream'
 import type {
   AnyBulkWriteOperation,
   ChangeStreamDocument,
@@ -6,13 +11,9 @@ import type {
   Collection,
   Document,
 } from 'mongodb'
-import type { Redis } from 'ioredis'
-import mongoChangeStream, {
-  ScanOptions,
-  ChangeStreamOptions,
-} from 'mongochangestream'
-import { QueueOptions } from 'prom-utils'
-import { SyncOptions, Events } from './types.js'
+import type { QueueOptions } from 'prom-utils'
+
+import type { Events, SyncOptions } from './types.js'
 
 export const initSync = (
   redis: Redis,
@@ -89,7 +90,7 @@ export const initSync = (
       }))
       // Operations are unordered
       const result = await destination.bulkWrite(operations, { ordered: false })
-      const numSuccess = result.nInserted
+      const numSuccess = result.insertedCount
       const numFailed = operations.length - numSuccess
       emit('process', {
         success: numSuccess,

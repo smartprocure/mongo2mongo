@@ -1,3 +1,8 @@
+# 0.27.0
+
+- Latest `mongochangestream`.
+- Bumped peer dependencies for `ioredis` and `mongodb`.
+
 # 0.26.0
 
 - Remove `updateDescription` since it is not needed and may cause a `BSONObjectTooLarge` error.
