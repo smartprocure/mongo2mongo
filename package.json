@@ -14,14 +14,7 @@
     "lint": "eslint src/**",
     "fmt": "prettier --ignore-path .gitignore --write './'"
   },
-  "keywords": [
-    "mongodb",
-    "mongo",
-    "sync",
-    "collection",
-    "change",
-    "stream"
-  ],
+  "keywords": ["mongodb", "mongo", "sync", "collection", "change", "stream"],
   "author": "GovSpend",
   "license": "ISC",
   "engines": {
@@ -53,12 +46,8 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5",
-    "plugins": [
-      "@trivago/prettier-plugin-sort-imports"
-    ],
-    "importOrder": [
-      "^[./]"
-    ],
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "importOrder": ["^[./]"],
     "importOrderSortSpecifiers": true,
     "importOrderCaseInsensitive": true,
     "importOrderSeparation": true
