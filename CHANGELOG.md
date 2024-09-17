@@ -1,3 +1,8 @@
+# 0.30.0
+
+-   Bump `mongochangestream` to enable "pausable" feature.
+-   Bumped deps.
+
 # 0.29.0
 
 -   Bump packages, including latest `prom-utils` which allows for throttling of items/sec and bytes/sec.
