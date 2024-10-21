@@ -1,3 +1,7 @@
+# 0.31.0
+
+-   Bumped deps.
+
 # 0.30.0
 
 -   Bump `mongochangestream` to enable "pausable" feature.
