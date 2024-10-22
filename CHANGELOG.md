@@ -1,3 +1,7 @@
+# 0.32.0
+
+-   Latest `mongochangestream` - Fix for downstream `processRecords` mutation.
+
 # 0.31.0
 
 -   Bumped deps.
