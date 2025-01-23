@@ -28,7 +28,7 @@ const getConns = _.memoize(async () => {
   const sourceColl = sourceDb.collection('testing')
   // MongoDB destination
   const mongoDestintationClient = await MongoClient.connect(
-    process.env.MONGO_SOURCE_CONN as string
+    process.env.MONGO_DESTINATION_CONN as string
   )
   const destinationDb = mongoDestintationClient.db()
   const destinationColl = sourceDb.collection('testing2')
