@@ -1,6 +1,6 @@
 # 0.33.0
 
-- Moved re-try logic out of this package.
+- Move re-try logic out of this package.
 - Added tests.
 
 # 0.32.0
