@@ -1,9 +1,7 @@
 import type { Redis } from 'ioredis'
 import _ from 'lodash/fp.js'
-import mongoChangeStream, {
-  type ChangeStreamOptions,
-  type ScanOptions,
-} from 'mongochangestream'
+import * as mongoChangeStream from 'mongochangestream'
+import { type ChangeStreamOptions, type ScanOptions } from 'mongochangestream'
 import type {
   AnyBulkWriteOperation,
   ChangeStreamDocument,
@@ -34,72 +32,64 @@ export const initSync = (
    * Process change stream events.
    */
   const processChangeStreamRecords = async (docs: ChangeStreamDocument[]) => {
-    try {
-      const operations: AnyBulkWriteOperation[] = []
-      for (const doc of docs) {
-        if (doc.operationType === 'insert') {
-          operations.push({
-            insertOne: {
-              document: mapper(doc.fullDocument),
-            },
-          })
-        } else if (
-          doc.operationType === 'update' ||
-          doc.operationType === 'replace'
-        ) {
-          const replacement = doc.fullDocument ? mapper(doc.fullDocument) : {}
-          operations.push({
-            replaceOne: {
-              filter: { _id: doc.documentKey._id },
-              replacement,
-              upsert: true,
-            },
-          })
-        } else if (doc.operationType === 'delete') {
-          operations.push({
-            deleteOne: {
-              filter: { _id: doc.documentKey._id },
-            },
-          })
-        }
+    const operations: AnyBulkWriteOperation[] = []
+    for (const doc of docs) {
+      if (doc.operationType === 'insert') {
+        operations.push({
+          insertOne: {
+            document: mapper(doc.fullDocument),
+          },
+        })
+      } else if (
+        doc.operationType === 'update' ||
+        doc.operationType === 'replace'
+      ) {
+        const replacement = doc.fullDocument ? mapper(doc.fullDocument) : {}
+        operations.push({
+          replaceOne: {
+            filter: { _id: doc.documentKey._id },
+            replacement,
+            upsert: true,
+          },
+        })
+      } else if (doc.operationType === 'delete') {
+        operations.push({
+          deleteOne: {
+            filter: { _id: doc.documentKey._id },
+          },
+        })
       }
-      const result = await destination.bulkWrite(operations, {
-        // Operations must be ordered
-        ordered: true,
-      })
-      const numSuccess = _.flow(
-        _.pick(['nInserted', 'nModified', 'nRemoved', 'nUpserted']),
-        Object.values,
-        _.sum
-      )(result)
-      const numFailed = operations.length - numSuccess
-      emit('process', {
-        success: numSuccess,
-        fail: numFailed,
-        changeStream: true,
-      })
-    } catch (e) {
-      emit('error', { error: e, changeStream: true })
     }
+    const result = await destination.bulkWrite(operations, {
+      // Operations must be ordered
+      ordered: true,
+    })
+    const numSuccess = _.flow(
+      _.pick(['nInserted', 'nModified', 'nRemoved', 'nUpserted']),
+      Object.values,
+      _.sum
+    )(result)
+    const numFailed = operations.length - numSuccess
+    emit('process', {
+      success: numSuccess,
+      fail: numFailed,
+      changeStream: true,
+    })
   }
 
   const processRecords = async (docs: ChangeStreamInsertDocument[]) => {
-    try {
-      const operations = docs.map(({ fullDocument }) => ({
-        insertOne: { document: mapper(fullDocument) },
-      }))
-      // Operations are unordered
-      const result = await destination.bulkWrite(operations, { ordered: false })
-      const numSuccess = result.insertedCount
-      const numFailed = operations.length - numSuccess
-      emit('process', {
-        success: numSuccess,
-        fail: numFailed,
-        initialScan: true,
-      })
-    } catch (e) {
-      emit('error', { error: e, initialScan: true })
-    }
+    const operations = docs.map(({ fullDocument }) => ({
+      insertOne: { document: mapper(fullDocument) },
+    }))
+    // Operations are unordered
+    const result = await destination.bulkWrite(operations, { ordered: false })
+    const numSuccess = result.insertedCount
+    const numFailed = operations.length - numSuccess
+    emit('process', {
+      success: numSuccess,
+      fail: numFailed,
+      initialScan: true,
+    })
   }
 
   const processChangeStream = (options?: QueueOptions & ChangeStreamOptions) =>
