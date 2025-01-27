@@ -32,9 +32,10 @@ const initialScan = await sync.runInitialScan(options)
 initialScan.start()
 ```
 
-## Run the test locally
+## Run the tests locally
 
 Create a .env file with the following variables set for your MongoDB cluster(s).
+Note: source and destination can be the same.
 
 ```
 MONGO_SOURCE_CONN="mongodb+srv://..."
