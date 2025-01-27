@@ -1,6 +1,7 @@
 # 0.33.0
 
 - Move re-try logic out of this package.
+- Removed `error` event.
 - Added tests.
 
 # 0.32.0
