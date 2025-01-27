@@ -62,8 +62,8 @@ describe.sequential('syncCollection', () => {
     await setTimeout(ms('1s'))
     // Stop
     await initialScan.stop()
-    const countResponse = await destinationColl.countDocuments()
-    expect(countResponse).toBe(numDocs)
+    const count = await destinationColl.countDocuments()
+    expect(count).toBe(numDocs)
   })
   test('should process records via change stream', async () => {
     const { sourceDb, sourceColl, destinationDb, destinationColl } =
@@ -80,11 +80,11 @@ describe.sequential('syncCollection', () => {
     sourceColl.updateMany({}, { $set: { createdAt: date } })
     // Wait for the change stream events to be processed
     await setTimeout(ms('2s'))
-    const countResponse = await destinationColl.countDocuments({
+    const count = await destinationColl.countDocuments({
       createdAt: date,
     })
     // Stop
     await changeStream.stop()
-    expect(countResponse).toBe(numDocs)
+    expect(count).toBe(numDocs)
   })
 })
