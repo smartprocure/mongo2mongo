@@ -31,3 +31,13 @@ const options = { batchSize: 1000 }
 const initialScan = await sync.runInitialScan(options)
 initialScan.start()
 ```
+
+## Run the tests locally
+
+Create a .env file with the following variables set for your MongoDB cluster(s).
+Note: source and destination can be the same.
+
+```
+MONGO_SOURCE_CONN="mongodb+srv://..."
+MONGO_DESTINATION_CONN="mongodb+srv://..."
+```

@@ -1,41 +1,52 @@
 {
   "name": "mongo2mongo",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "description": "Sync one MongoDB collection to another MongoDB collection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "repository": "git://github.com/smartprocure/mongo2mongo.git",
   "scripts": {
-    "prepare": "npm run lint && npm run build",
+    "prepare": "npm test && npm run lint && npm run build",
+    "test": "vitest run",
+    "test:watch": "DEBUG=mongo* vitest",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc --declaration",
-    "build:develop": "tsc --watch",
+    "build:watch": "tsc --watch",
     "lint": "eslint src/**",
     "fmt": "prettier --ignore-path .gitignore --write './'"
   },
-  "keywords": ["mongodb", "mongo", "sync", "collection", "change", "stream"],
+  "keywords": [
+    "mongodb",
+    "mongo",
+    "sync",
+    "collection",
+    "change",
+    "stream"
+  ],
   "author": "GovSpend",
   "license": "ISC",
   "engines": {
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
     "@types/debug": "^4.1.12",
-    "@types/lodash": "^4.17.12",
-    "@types/node": "^22.7.8",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "prettier": "^3.3.3",
-    "typescript": "^5.6.3"
+    "@types/lodash": "^4.17.14",
+    "@types/node": "^22.10.9",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "mongochangestream-testing": "^0.4.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
   },
   "dependencies": {
-    "debug": "^4.3.7",
+    "debug": "^4.4.0",
     "eventemitter3": "^5.0.1",
     "lodash": "^4.17.21",
-    "mongochangestream": "^0.55.0",
+    "mongochangestream": "^0.58.0",
     "obj-walker": "^2.4.0",
-    "p-retry": "^6.2.0",
+    "p-retry": "^6.2.1",
     "prom-utils": "^0.14.0"
   },
   "peerDependencies": {
@@ -46,8 +57,12 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5",
-    "plugins": ["@trivago/prettier-plugin-sort-imports"],
-    "importOrder": ["^[./]"],
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "^[./]"
+    ],
     "importOrderSortSpecifiers": true,
     "importOrderCaseInsensitive": true,
     "importOrderSeparation": true
