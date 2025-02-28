@@ -41,3 +41,5 @@ Note: source and destination can be the same.
 MONGO_SOURCE_CONN="mongodb+srv://..."
 MONGO_DESTINATION_CONN="mongodb+srv://..."
 ```
+
+Then run `npm test` to run the tests.
