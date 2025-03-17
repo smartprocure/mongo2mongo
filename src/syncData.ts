@@ -65,7 +65,12 @@ export const initSync = (
       ordered: true,
     })
     const numSuccess = _.flow(
-      _.pick(['nInserted', 'nModified', 'nRemoved', 'nUpserted']),
+      _.pick([
+        'insertedCount',
+        'modifiedCount',
+        'deletedCount',
+        'upsertedCount',
+      ]),
       Object.values,
       _.sum
     )(result)
