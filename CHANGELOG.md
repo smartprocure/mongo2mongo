@@ -1,3 +1,9 @@
+# 0.35.0
+
+- Fixed [an issue](https://github.com/smartprocure/mongo2mongo/issues/3) where
+  the "process" event was being emitted with incorrect `success` and `failure`
+  values.
+
 # 0.34.0
 
 - Latest `mongochangestream` - Performance improvements related to updating the
