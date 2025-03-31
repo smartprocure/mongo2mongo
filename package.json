@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "repository": "git://github.com/smartprocure/mongo2mongo.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smartprocure/mongo2mongo.git"
+  },
   "scripts": {
     "prepare": "npm test && npm run lint && npm run build",
     "test": "vitest run",
