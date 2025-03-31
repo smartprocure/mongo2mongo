@@ -1,3 +1,7 @@
+# 0.36.0
+
+- Bumped dependencies to fix security vulnerabilities.
+
 # 0.35.0
 
 - Fixed [an issue](https://github.com/smartprocure/mongo2mongo/issues/3) where

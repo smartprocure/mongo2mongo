@@ -1,11 +1,14 @@
 {
   "name": "mongo2mongo",
-  "version": "0.35.0",
+  "version": "0.36.0",
   "description": "Sync one MongoDB collection to another MongoDB collection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "repository": "git://github.com/smartprocure/mongo2mongo.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smartprocure/mongo2mongo.git"
+  },
   "scripts": {
     "prepare": "npm test && npm run lint && npm run build",
     "test": "vitest run",
@@ -30,24 +33,24 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/debug": "^4.1.12",
-    "@types/lodash": "^4.17.14",
-    "@types/node": "^22.10.9",
-    "@typescript-eslint/eslint-plugin": "^8.21.0",
-    "mongochangestream-testing": "^0.5.0",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.4"
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.13.14",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "mongochangestream-testing": "^0.6.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
   },
   "dependencies": {
     "debug": "^4.4.0",
     "eventemitter3": "^5.0.1",
     "lodash": "^4.17.21",
-    "mongochangestream": "^0.59.0",
+    "mongochangestream": "^0.61.0",
     "obj-walker": "^2.4.0",
     "p-retry": "^6.2.1",
-    "prom-utils": "^0.14.0"
+    "prom-utils": "^0.16.0"
   },
   "peerDependencies": {
     "ioredis": ">= 5.4.1",
