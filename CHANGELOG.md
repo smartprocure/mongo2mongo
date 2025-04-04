@@ -1,3 +1,7 @@
+# 0.37.0
+
+- Latest `mongochangestream` - Fix hanging when stopping while paused.
+
 # 0.36.0
 
 - Bumped dependencies to fix security vulnerabilities.
