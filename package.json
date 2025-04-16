@@ -1,6 +1,6 @@
 {
   "name": "mongo2mongo",
-  "version": "0.37.0",
+  "version": "0.38.0",
   "description": "Sync one MongoDB collection to another MongoDB collection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -47,7 +47,7 @@
     "debug": "^4.4.0",
     "eventemitter3": "^5.0.1",
     "lodash": "^4.17.21",
-    "mongochangestream": "^0.61.1",
+    "mongochangestream": "^0.62.0",
     "obj-walker": "^2.4.0",
     "p-retry": "^6.2.1",
     "prom-utils": "^0.16.0"
