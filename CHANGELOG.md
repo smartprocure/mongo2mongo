@@ -1,3 +1,7 @@
+# 0.39.0
+
+- Latest `mongochangestream`
+
 # 0.38.0
 
 - Latest `mongochangestream` - Safely call p-retry, wrapping non-Error

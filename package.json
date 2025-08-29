@@ -1,6 +1,6 @@
 {
   "name": "mongo2mongo",
-  "version": "0.38.0",
+  "version": "0.39.0",
   "description": "Sync one MongoDB collection to another MongoDB collection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,21 +35,21 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/debug": "^4.1.12",
-    "@types/lodash": "^4.17.16",
-    "@types/node": "^22.14.0",
-    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
     "mongochangestream-testing": "^0.6.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "vitest": "^3.1.1"
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
-    "debug": "^4.4.0",
+    "debug": "^4.4.1",
     "eventemitter3": "^5.0.1",
     "lodash": "^4.17.21",
-    "mongochangestream": "^0.62.0",
+    "mongochangestream": "^0.63.0",
     "obj-walker": "^2.4.0",
-    "p-retry": "^6.2.1",
+    "p-retry": "^7.0.0",
     "prom-utils": "^0.16.0"
   },
   "peerDependencies": {
