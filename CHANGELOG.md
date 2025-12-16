@@ -1,3 +1,7 @@
+# 0.40.0
+
+- Bumped deps
+
 # 0.39.0
 
 - Latest `mongochangestream`
